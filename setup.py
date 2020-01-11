@@ -1,5 +1,5 @@
 try:
-    import setuptools
+    from setuptools import setup, find_namespace_packages
 except ModuleNotFoundError as ex:
     print(ex.msg)
     exit(1)
@@ -7,7 +7,7 @@ except ModuleNotFoundError as ex:
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name="yt-audio-pseudoroot",
     version="0.1",
     author="pseudoroot",
@@ -16,7 +16,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pseudoroot/yt-audio",
-    packages=setuptools.find_packages(),
+    packages=find_namespace_packages(),
     install_requires=['youtube-dl'],
     classifiers=[
         "Programming Language :: Python :: 3",

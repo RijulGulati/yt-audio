@@ -10,7 +10,8 @@ class Arguments:
         """
         self.parser = argparse.ArgumentParser(prog='yt-audio'
                                               "A simple youtube-dl wrapper for downloading and managing youtube audio",
-                                              usage='yt-audio [OPTIONS] [URL[::DIR] [URL[::DIR]...] and/or CUSTOM_ARGUMENT [CUSTOM_ARGUMENT...]]')
+                                              usage='yt-audio [OPTIONS] URL[::DIR] [URL[::DIR]...]'
+                                              ' and/or CUSTOM_ARGUMENT [CUSTOM_ARGUMENT...]')
 
         self.parser.add_argument("url_list", nargs='*',
                                  help="Video/Playlist URL with (optional) save directory [URL::dir]",
