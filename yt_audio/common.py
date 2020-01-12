@@ -188,8 +188,11 @@ class Common:
         """
         try:
             if key == 'url_list':
-                _url_list = [custom_args[x]
-                             for x in custom_args if args[x]]
+                if 'all_custom_args' in args and args['all_custom_args']:
+                    _url_list = [custom_args[x] for x in custom_args]
+                else:
+                    _url_list = [custom_args[x]
+                                 for x in custom_args if args[x]]
                 if args[key]:
                     _url_list = _url_list + args[key]
                 return _url_list
@@ -214,7 +217,7 @@ class Common:
             try:
                 next(self.ExecuteCommand(_dep))
             except FileNotFoundError as ex:
-                self.log('{0} not found. Please install {0} and try again'.format(
+                self.log('{0} not found. Please install {0} and try again.\n'.format(
                     ex.filename), 'error')
                 exit(1)
             except Exception as ex:

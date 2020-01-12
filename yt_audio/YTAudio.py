@@ -5,8 +5,8 @@ import os
 import sys
 from pathlib import Path, PurePath
 
-from arguments import Arguments
-from common import Common
+from .arguments import get_args
+from .common import Common
 
 
 class YTAudio:
@@ -17,10 +17,8 @@ class YTAudio:
     def __init__(self):
         try:
             self.common = Common()
-            _obj_arguments = Arguments()
             self.config = self.common.read_config()
-            self.args, self.custom_args = _obj_arguments.get_args(
-                self.config['DEFAULT'])
+            self.args, self.custom_args = get_args(self.config['DEFAULT'])
             self.common.check_dependencies()
             self.url_list = []
             self.output_format = ''
@@ -157,13 +155,13 @@ class YTAudio:
 
             if _missed_req_args:
                 raise Exception(
-                    'The following youtube-dl (download) arguments are mandatory for yt-audio to work: {0}'.format(
+                    'The following youtube-dl arguments are mandatory for yt-audio to work: {0}'.format(
                         " ".join(_missed_req_args)))
         except Exception as ex:
             raise ex
 
 
-if __name__ == "__main__":
+def main():
     try:
         ytaudio = YTAudio()
         ytaudio.yt_audio()
@@ -173,3 +171,7 @@ if __name__ == "__main__":
     except Exception as ex:
         print("\nError: " + str(ex) + "\n")
         sys.exit(1)
+
+
+# if __name__ == "__main__":
+#     main()
