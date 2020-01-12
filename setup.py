@@ -34,5 +34,6 @@ setup(
         "Topic :: Multimedia :: Sound/Audio",
         "License :: OSI Approved :: MIT License"
     ],
+    license='MIT',
     python_requires='>=3.5',
 )

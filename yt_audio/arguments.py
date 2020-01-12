@@ -10,7 +10,7 @@ def get_args(config):
     Get CLI arguments
     """
 
-    _description = 'A simple youtube-dl wrapper for downloading and managing youtube audio'
+    _description = 'A simple, configurable youtube-dl wrapper for downloading and managing youtube audio.'
     _usage = '%(prog)s [OPTIONS] REQUIRED_ARGS'
     _conflict_handler = 'resolve'
 
