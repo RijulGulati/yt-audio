@@ -39,7 +39,7 @@ def get_args(config):
                          help="youtube-dl audio download command")
 
     cargs = custom_args(config, required)
-    args = vars(parser.parse_args('--all'.split(' ')))
+    args = vars(parser.parse_args())
     return args, cargs
 
 
