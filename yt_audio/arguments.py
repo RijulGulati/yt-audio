@@ -1,6 +1,5 @@
 import argparse
 import ast
-import sys
 
 from .version import __version__
 
@@ -29,17 +28,15 @@ def get_args(config):
                          help='show this help message and exit')
     options.add_argument('-v', '--version', action='version', version='%(prog)s {0}'.format(__version__),
                          help='show version and exit')
-    options.add_argument("--ffprobe-command", dest='ffprobe_command',
-                         nargs='?', help="ffprobe command")
     options.add_argument("--output-format", dest='output_format',
                          nargs='?', help="File output format")
-    options.add_argument("--playlist-info-command", dest='playlist_info_command',
-                         nargs='?', help="Fetch playlist info")
-    options.add_argument("--download-command", nargs='?', dest='download_command',
-                         help="youtube-dl audio download command")
+    options.add_argument("--ytdl-args", nargs='?', dest='ytdl_additional_args',
+                         help="youtube-dl additional arguments")
+    options.add_argument("--use-archive", action='store_true', dest='use_archive',
+                         help="use archive file (instead of metadata) to track downloaded titles")
 
     cargs = custom_args(config, required)
-    args = vars(parser.parse_args())
+    args = vars(parser.parse_args('https://'.split(' ')))
     return args, cargs
 
 

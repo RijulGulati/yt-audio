@@ -19,6 +19,10 @@ class Common:
         'output_directory': str(PurePath(Path.home(), "Music"))
     }
 
+    def __init__(self):
+        self.ffprobe = True
+        self.avprobe = True
+
     def ExecuteCommand(self, command, is_shell=False, single_line=False):
         """
         Executes command as a new process and returns response
@@ -165,6 +169,8 @@ class Common:
                 print("\033[31mError:\033[0m {0}".format(message))
         elif message_type == 'info':
             print('\033[36m{0}\033[0m'.format(message))
+        elif message_type == 'warning':
+            print("\033[33mWarning:\033[0m {0}".format(message))
         else:
             print('{0}'.format(message))
 
@@ -200,7 +206,12 @@ class Common:
             if key in args and args[key]:
                 return args[key]
             elif key in config and config[key]:
-                return config[key]
+                if config[key] == '1':
+                    return True
+                elif config[key] == '0':
+                    return False
+                else:
+                    return config[key]
             elif key in self.DEFAULT_ARGUMENT_VALUES:
                 return self.DEFAULT_ARGUMENT_VALUES[key]
             else:
@@ -209,16 +220,45 @@ class Common:
             pass
 
     def check_dependencies(self):
-        _dependencies = ["ffmpeg -version",
-                         "ffprobe -version",
-                         "youtube-dl --version"
+        _dependencies = ["ffmpeg -version|avconv -version",
+                         "ffprobe -version|avprobe -version",
+                         "youtube-dl --version",
                          ]
         for _dep in _dependencies:
             try:
-                next(self.ExecuteCommand(_dep))
+                if len(_dep.split('|')) > 1:
+                    _not_found = []
+                    for opt in _dep.split('|'):
+                        try:
+                            next(self.ExecuteCommand(opt))
+                        except FileNotFoundError as ex:
+                            _not_found.append(ex.filename)
+                            if ex.filename == 'ffprobe':
+                                self.ffprobe = False
+                            elif ex.filename == 'avprobe':
+                                self.avprobe = False
+                            pass
+                    if len(_not_found) == len(_dep.split('|')):
+                        self.log('Either of {0} required. Please install and try again.\n'.format(
+                            '/'.join(_not_found)), 'error')
+                        exit(1)
+
+                else:
+                    next(self.ExecuteCommand(_dep))
             except FileNotFoundError as ex:
                 self.log('{0} not found. Please install {0} and try again.\n'.format(
                     ex.filename), 'error')
                 exit(1)
             except Exception as ex:
                 raise ex
+
+    def read_archive(self, archive_file):
+        try:
+            with open(archive_file) as archive:
+                data = archive.readlines()
+                return data
+        except FileNotFoundError as ex:
+            self.log(ex.filename + ': ' + ex.strerror, 'warning')
+            self.log("> New archive file '{0}' will be created\n".format(
+                ex.filename), 'info')
+            return None
