@@ -19,7 +19,7 @@ yt-audio is a command-line program that is used download and manage audio from y
 
 
 ## Usage
-    usage: yt-audio [OPTIONS] REQUIRED_ARGS
+    usage: YTAudio.py [OPTIONS] REQUIRED_ARGS
 
     A simple, configurable youtube-dl wrapper for downloading and managing youtube audio.
 
@@ -31,11 +31,12 @@ yt-audio is a command-line program that is used download and manage audio from y
     Optional Arguments:
     -h, --help            show this help message and exit
     -v, --version         show version and exit
+    --use-archive         use archive file to track downloaded titles
+    --use-metadata        use metadata to track downloaded titles
     --output-format [OUTPUT_FORMAT]
                             File output format
     --ytdl-args [YTDL_ADDITIONAL_ARGS]
                             youtube-dl additional arguments
-    --use-archive         use archive file (instead of metadata) to track downloaded titles
 
 **yt-audio requires either URL or custom argument(s) as mandatory input(s).**
 
