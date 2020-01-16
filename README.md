@@ -143,7 +143,6 @@ The commands used by yt-audio can be modified from config file. Unusual paramete
 
 ## Limitations
 - Works for youtube.com only (for now).
-- Keeping track of downloaded tracks via **metadata info** does not work with m4a format. MP3 works fine. I tested these two formats. If you find any other format working/not-working, please update me or mention here (create pull request for the same).
 
 ## Bugs/Issues
 Please [create](https://github.com/pseudoroot/yt-audio/issues/new) issue for the same.
