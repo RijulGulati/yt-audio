@@ -105,25 +105,6 @@ class Common:
         except Exception as ex:
             raise ex
 
-    def is_playlist(self, url, playlist_base_url):
-        """
-        Checks whether the given URL is playlist or not.
-
-        Parameters:
-        ==========
-        > url (string): URL.
-
-        > playlist_base_url (string): base URL to match
-
-        Returns:
-        =======
-        > bool value (True = Playlist, False = Not playlist)
-        """
-        if playlist_base_url in url:
-            return True
-        else:
-            return False
-
     def get_configfile_path(self, config_custom_path):
         """
         Get configuration file absolute path
@@ -230,12 +211,15 @@ class Common:
                     _not_found = []
                     for opt in _dep.split('|'):
                         try:
-                            next(self.ExecuteCommand(opt))
-                        except FileNotFoundError as ex:
-                            _not_found.append(ex.filename)
-                            if ex.filename == 'ffprobe':
+                            res = next(self.ExecuteCommand(opt))
+                            if res:
+                                break
+                        except FileNotFoundError:
+                            _file = opt.split(' ')[0]
+                            _not_found.append(_file)
+                            if _file == 'ffprobe':
                                 self.ffprobe = False
-                            elif ex.filename == 'avprobe':
+                            elif _file == 'avprobe':
                                 self.avprobe = False
                             pass
                     if len(_not_found) == len(_dep.split('|')):
@@ -245,9 +229,9 @@ class Common:
 
                 else:
                     next(self.ExecuteCommand(_dep))
-            except FileNotFoundError as ex:
+            except FileNotFoundError:
                 self.log('{0} not found. Please install {0} and try again.\n'.format(
-                    ex.filename), 'error')
+                    _dep.split(' ')[0]), 'error')
                 exit(1)
             except Exception as ex:
                 raise ex

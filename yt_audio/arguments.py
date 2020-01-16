@@ -28,15 +28,17 @@ def get_args(config):
                          help='show this help message and exit')
     options.add_argument('-v', '--version', action='version', version='%(prog)s {0}'.format(__version__),
                          help='show version and exit')
+    options.add_argument("--use-archive", action='store_true', dest='use_archive',
+                         help="use archive file to track downloaded titles")
+    options.add_argument("--use-metadata", action='store_true', dest='use_metadata',
+                         help="use metadata to track downloaded titles")
     options.add_argument("--output-format", dest='output_format',
                          nargs='?', help="File output format")
     options.add_argument("--ytdl-args", nargs='?', dest='ytdl_additional_args',
                          help="youtube-dl additional arguments")
-    options.add_argument("--use-archive", action='store_true', dest='use_archive',
-                         help="use archive file (instead of metadata) to track downloaded titles")
 
     cargs = custom_args(config, required)
-    args = vars(parser.parse_args('https://'.split(' ')))
+    args = vars(parser.parse_args())
     return args, cargs
 
 

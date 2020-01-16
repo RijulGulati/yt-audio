@@ -12,8 +12,8 @@ yt-audio can be installed via [pip](pip_link_here). Arch Linux users can use [AU
 yt-audio is a command-line program that is used download and manage audio from youtube.com. It is a youtube-dl wrapper program, which means it uses youtube-dl as backend for downloading audio. yt-audio tries to make audio/playlist management easy for users. It is cross-platform (Windows/Linux/MacOS).
 
 ### Features
-- Configure/Setup your own command-line arguments for managing playlists (See [usage](link) below)
-- Ability to save every audio/playlist to a different directory (directory specified in argument).
+- Configure/Setup your own command-line arguments for managing titles/playlists (See [usage](link) below)
+- Ability to save each audio/playlist to a different directory (directory specified in argument).
 - Option to keep track of already-downloaded playlist titles **with or without archive file**.
 - Manage single/playlist audio(s).
 
@@ -40,7 +40,7 @@ yt-audio is a command-line program that is used download and manage audio from y
 **yt-audio requires either URL or custom argument(s) as mandatory input(s).**
 
 ### Custom Arguments
-yt-audio gives user the ability to setup their own custom arguments for managing/synchronizing audio/playlists. Custom arguments can be setup using yt-audio's *(config.ini)* configuration file.
+yt-audio gives user the ability to setup their own custom arguments for managing/synchronizing audio/playlists. Custom arguments can be configured in yt-audio's *(config.ini)* configuration file.
 
 > <span style="color:red">**NOTE (pip users): The user, if required, will have to copy the configuration file as it is not copied during installation.**</span>
 
@@ -55,6 +55,7 @@ The config file *config.ini* has URL_LIST[] option where users can specify argum
 
     URL_LIST = [
                     # "['-short_arg1','--long_arg1','Help Text/Description']::URL::PATH"
+
                     # PATH (optional) specifies output directory for that particular playlist
                     # PATH should be absoulte directory path
                     # URL: Complete youtube title/playlist URL
@@ -69,14 +70,34 @@ URL_LIST takes comma-separated string values. Each string value is formed from 3
 - URL: Youtube playlist/title URL.
 - PATH (optional): Path where this particular playlist/title will be saved. Provide absolute PATH here.
 
+All custom arguments are visible in --help [`$ yt-audio --help`]
+
 The default save PATH is **$HOME/Music**.  PATH can be configured by user in config file (OUTPUT_DIRECTORY = \<dir>). For playlists, one more directory of \<PlaylistName> is created where all playlist records are saved.
 
 #### Keeping track of downloaded titles/playlists
 yt-audio has an added feature of keeping track of audio files using **file's metadata**. This removes the requirement of additional archive file to store title(s) info (option provided by youtube-dl).
 
+User can specify any of the two ways to keep track of downloaded titles. (By default, downloaded titles are **not tracked**)
+
+
+_**Using File Metadata**_
+
+To use file's metadata, pass `--use-metadata` argument to yt-audio. To use metadata everytime, you can set `USE_METADATA = 1` in config file. Metadata method requires following to work:
+- `--add-metadata` argument to youtube-dl (`--add-metadata` argument is added by yt-audio by default. If you don't want this, you can re-configure youtube-dl command in config).
+
+
+_Known limitations of using metadata method_
+- I have tried this method with both MP3 and M4A format. MP3 works fine. M4a does not work.
+
+
+**_Using Archive File_**
+
 To use archive file method, pass `--use-archive` argument to yt-audio. To use archive file everytime with yt-audio, you can set `USE_ARCHIVE = 1` in config file. This will create 'records.txt' file in title's download location.
 
 `--use-archive` flag simply passes youtube-dl's `--download-archive FILE` argument to youtube-dl. You can pass your own filename to youtube-dl as well with `--ytdl-args \"--download-archive FILE\"`. More info about ['--ytdl-args']() argument.
+
+    # Enable metadata
+    $ yt-audio --use-metadata [URL/custom_args]
 
     # Enable archive file - creates records.txt file
     $ yt-audio --use-archive [URL/custom_args]
@@ -84,9 +105,8 @@ To use archive file method, pass `--use-archive` argument to yt-audio. To use ar
     # Enable archive file - creates archive.txt file
     $ yt-audio --ytdl-args \"--download-archive FILE\" [URL/custom_args]
 
-_**Which of the two is enabled by default?**_
 
-The metadata method requires `--add-metadata` youtube-dl argument to work. If this argument is found in youtube-dl command AND archive file is not used (either through `--use-archive` or config or as additional parameter to youtube-dl (`--download-archive FILE`)) then **metadata** is used. Else archive file is used.
+_If both metadata and archive file are enabled, archive file method is used_
 
 
 #### Title/Playlist-specific PATH
