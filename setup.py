@@ -14,7 +14,7 @@ setup(
     version=__version__,
     author="pseudoroot",
     author_email="pseudoroot@protonmail.ch",
-    description="A simple, configurable youtube-dl wrapper to download and manage youtube audio.",
+    description="A simple, configurable youtube-dl wrapper to download and manage youtube audio (with added features)",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pseudoroot/yt-audio",

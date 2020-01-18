@@ -1,5 +1,6 @@
 # yt-audio
-A simple, configurable, cross-platform youtube-dl wrapper for downloading and managing youtube audio.
+A simple, configurable, cross-platform youtube-dl wrapper for downloading and managing youtube audio (with added features).
+
 
 ## Installation
 - Requires [Python3](https://www.python.org/downloads/) (>=3.5), [youtube-dl](https://github.com/ytdl-org/youtube-dl) and [ffmpeg](https://www.ffmpeg.org/)/[avconv](https://libav.org/) as dependencies.
@@ -38,12 +39,12 @@ yt-audio is a command-line program that is used download and manage audio from y
     --ytdl-args [YTDL_ADDITIONAL_ARGS]
                             youtube-dl additional arguments
 
-**yt-audio requires either URL or custom argument(s) as mandatory input(s).**
+**yt-audio requires either URL or custom argument(s) (or both) as mandatory input(s).**
 
 ### Custom Arguments
 yt-audio gives user the ability to setup their own custom arguments for managing/synchronizing audio/playlists. Custom arguments can be configured in yt-audio's *(config.ini)* configuration file.
 
-**NOTE (pip users): The user, if required, will have to copy the configuration file as it is not copied during installation.**
+**NOTE (pip users): The user, if required, will have to copy the [configuration file](https://github.com/pseudoroot/yt-audio/blob/development/config.ini) as it is not copied during installation.**
 
 **Unix/Linux Users:**
 The default config location is **$XDG_CONFIG_HOME/yt-audio/** directory. In case *$XDG_CONFIG_HOME* is not set, the file can be placed in **$HOME/.config/yt-audio/** directory.
@@ -141,11 +142,33 @@ The commands used by yt-audio can be modified from config file. Unusual paramete
     # Different output format
     $ yt-audio --output-format "%(display_id)s.%(ext)s" https://youtube.com/...
 
+
+## yt-audo defaults
+The following commands are used by yt-audio to download and manage audio. The commands are configurable using config file.
+
+**youtube-dl audio download**
+
+    # (-x --print-json -o "$OUTPUT$" $URL$) are mandatory
+    $ youtube-dl -x --print-json --audio-format mp3 --audio-quality 0 --add-metadata --embed-thumbnail -o "$OUTPUT$" $URL$
+
+**get playlist/URL info**
+
+    $ youtube-dl --flat-playlist -J $PLAYLIST_URL$
+
+**get file's metadata** (used when downloaded titles are tracked using metadata)
+
+    $ ffprobe -v quiet -print_format json -show_format -hide_banner "$PATH$"
+
+
 ## Limitations
-- Works for youtube.com only (for now).
+- Keeping track of downloaded tracks works with youtube.com only (for now).
 
 ## Bugs/Issues
 Please [create](https://github.com/pseudoroot/yt-audio/issues/new) issue for the same.
+I'm open to suggestions as well :)
+
+## Contact
+Feel free get in touch with me via [Twitter](https://twitter.com/pseud0root) or [Email](mailto:pseudoroot@protonmail.ch).
 
 # License
 [MIT](https://github.com/pseudoroot/yt-audio/blob/master/LICENSE)
