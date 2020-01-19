@@ -143,7 +143,7 @@ The commands used by yt-audio can be modified from config file. Unusual paramete
     $ yt-audio --output-format "%(display_id)s.%(ext)s" https://youtube.com/...
 
 
-## yt-audo defaults
+## yt-audio defaults
 The following commands are used by yt-audio to download and manage audio. The commands are configurable using config file.
 
 **youtube-dl audio download**
