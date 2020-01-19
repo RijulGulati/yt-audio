@@ -5,7 +5,7 @@ A simple, configurable, cross-platform youtube-dl wrapper for downloading and ma
 ## Installation
 - Requires [Python3](https://www.python.org/downloads/) (>=3.5), [youtube-dl](https://github.com/ytdl-org/youtube-dl) and [ffmpeg](https://www.ffmpeg.org/)/[avconv](https://libav.org/) as dependencies.
 
-yt-audio can be installed via [pip](pip_link_here). Arch Linux users can use [AUR](link) as well.
+yt-audio can be installed via [pip](https://pypi.org/project/yt-audio/). Arch Linux users can use [AUR](https://aur.archlinux.org/packages/yt-audio/) as well.
 
 `$ [sudo] pip3 install --upgrade yt-audio`
 
@@ -13,7 +13,7 @@ yt-audio can be installed via [pip](pip_link_here). Arch Linux users can use [AU
 yt-audio is a command-line program that is used download and manage audio from youtube.com. It is a youtube-dl wrapper program, which means it uses youtube-dl as backend for downloading audio. yt-audio tries to make audio/playlist management easy for users. It is cross-platform (Windows/Linux/MacOS).
 
 ### Features
-- Configure/Setup your own command-line arguments for managing titles/playlists (See [usage](link) below)
+- Configure/Setup your own command-line arguments for managing titles/playlists (See [usage](https://github.com/pseudoroot/yt-audio#custom-arguments) below)
 - Ability to save each audio/playlist to a different directory (directory specified in argument).
 - Option to keep track of already-downloaded playlist titles **with or without archive file**.
 - Manage single/playlist audio(s).
@@ -96,7 +96,7 @@ _Known limitations of using metadata method_
 
 To use archive file method, pass `--use-archive` argument to yt-audio. To use archive file everytime with yt-audio, you can set `USE_ARCHIVE = 1` in config file. This will create 'records.txt' file in title's download location.
 
-`--use-archive` flag simply passes youtube-dl's `--download-archive FILE` argument to youtube-dl. You can pass your own filename to youtube-dl as well with `--ytdl-args \"--download-archive FILE\"`. More info about ['--ytdl-args']() argument.
+`--use-archive` flag simply passes youtube-dl's `--download-archive FILE` argument to youtube-dl. You can pass your own filename to youtube-dl as well with `--ytdl-args \"--download-archive FILE\"`. More info about ['--ytdl-args'](https://github.com/pseudoroot/yt-audio#passing-additional-paramaters-to-youtube-dl) argument.
 
     # Enable metadata
     $ yt-audio --use-metadata [URL/custom_args]
