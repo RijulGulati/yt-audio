@@ -44,7 +44,7 @@ yt-audio is a command-line program that is used download and manage audio from y
 ### Custom Arguments
 yt-audio gives user the ability to setup their own custom arguments for managing/synchronizing audio/playlists. Custom arguments can be configured in yt-audio's *(config.ini)* configuration file.
 
-**NOTE (pip users): The user, if required, will have to copy the [configuration file](https://github.com/pseudoroot/yt-audio/blob/development/config.ini) as it is not copied during installation.**
+**IMPORTANT NOTE: The user, if required, will have to copy the [configuration file](https://github.com/pseudoroot/yt-audio/blob/development/config.ini) as it is not copied during installation.**
 
 **Unix/Linux Users:**
 The default config location is **$XDG_CONFIG_HOME/yt-audio/** directory. In case *$XDG_CONFIG_HOME* is not set, the file can be placed in **$HOME/.config/yt-audio/** directory.
