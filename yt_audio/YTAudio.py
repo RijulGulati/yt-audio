@@ -185,7 +185,7 @@ class YTAudio:
                         _download_command = _download_command.replace(
                             self.archive_file, _archive_path)
                     self.common.download_audio(
-                        _download_command, len(_remote_url_list))
+                        _download_command, len(urls_to_download))
                 else:
                     self.common.log("Title(s) are already in sync.\n")
         except StopIteration:
