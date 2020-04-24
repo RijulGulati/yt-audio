@@ -118,9 +118,9 @@ class YTAudio:
                     audio_path = str(PurePath(path, title.name))
                     _url = self.common.get_file_url(
                         audio_path, self.ffprobe_cmd)
-                    if _url and _url not in url_list:
-                        urls_to_download.append(_url)
-                return urls_to_download
+                    if _url and _url in url_list:
+                        url_list.remove(_url)
+                return url_list
             else:
                 return url_list
         else:
