@@ -5,7 +5,7 @@ A simple, configurable, cross-platform youtube-dl wrapper for downloading and ma
 ## Installation
 - Requires [Python3](https://www.python.org/downloads/) (>=3.5), [youtube-dl](https://github.com/ytdl-org/youtube-dl) and [ffmpeg](https://www.ffmpeg.org/)/[avconv](https://libav.org/) as dependencies.
 
-yt-audio can be installed via [pip](https://pypi.org/project/yt-audio/). Arch Linux users can use [AUR](https://aur.archlinux.org/packages/yt-audio/) as well.
+yt-audio can be installed via [pip](https://pypi.org/project/yt-audio/). Arch Linux users can use [AUR]() as well.
 
 `$ [sudo] pip3 install --upgrade yt-audio`
 
@@ -168,7 +168,7 @@ Please [create](https://github.com/pseudoroot/yt-audio/issues/new) issue for the
 I'm open to suggestions as well :)
 
 ## Contact
-Feel free get in touch with me via [Twitter](https://twitter.com/pseud0root) or [Email](mailto:pseudoroot@protonmail.ch).
+Feel free get in touch with me via [Email](mailto:grijul@protonmail.ch).
 
 # License
 [MIT](https://github.com/pseudoroot/yt-audio/blob/master/LICENSE)
